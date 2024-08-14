@@ -40,7 +40,7 @@ bfs(visited, graph, '5')
 ```
 
 ### Output:
-
+![](BFS.png)
 
 
 ### Result:

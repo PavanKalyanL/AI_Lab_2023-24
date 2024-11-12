@@ -1,37 +1,37 @@
-# Ex.No: 2  Implementation of Depth First Search
-### DATE: 19/8/24                                                                    
-### REGISTER NUMBER :  212222040112
+# Ex.No: 3  Implementation of Minimax Search
+### DATE:  26/08/24                                                           
+### REGISTER NUMBER : 212222040112
 ### AIM: 
-To write a python program to implement Depth first Search. 
+Write a mini-max search algorithm to find the optimal value of MAX Player from the given graph.
 ### Algorithm:
 1. Start the program
-2. Create the graph by using adjacency list representation
-3. Define a function dfs and take the set “visited” is empty 
-4. Search start with initial node. Check the node is not visited then print the node.
-5. For each neighbor node, recursively invoke the dfs search.
-6. Call the dfs function by passing arguments visited, graph and starting node.
-7. Stop the program.
+2. import the math package
+3. Specify the score value of leaf nodes and find the depth of binary tree from leaf nodes.
+4. Define the minimax function
+5. If maximum depth is reached then get the score value of leaf node.
+6. Max player find the maximum value by calling the minmax function recursively.
+7. Min player find the minimum value by calling the minmax function recursively.
+8. Call the minimax function  and print the optimum value of Max player.
+9. Stop the program. 
+
 ### Program:
 ```
-# Using a Python dictionary to act as an adjacency list
-graph = {
- '5' : ['3','7'],
- '3' : ['2', '4'],
- '7' : ['8'],
- '2' : [],
- '4' : ['8'],
- '8' : []
-}
-visited = set() # Set to keep track of visited nodes of graph.
-def dfs(visited, graph, node):
-    if node not in visited:
-        print (node, end=" ")
-        visited.add(node)
-        for neighbour in graph[node]:
-            dfs(visited, graph, neighbour)
-# Driver Code
-print("Following is the Depth-First Search")
-dfs(visited, graph, '5') 
+import math
+def minimax (curDepth, nodeIndex,maxTurn, scores,targetDepth):
+ # base case : targetDepth reached
+    if (curDepth == targetDepth):
+        return scores[nodeIndex]
+    if (maxTurn):
+        return max(minimax(curDepth + 1, nodeIndex * 2,False, scores, targetDepth),minimax(curDepth + 1, nodeIndex * 2 + 1,False, scores, targetDepth))
+
+    else:
+        return min(minimax(curDepth + 1, nodeIndex * 2,True, scores, targetDepth),minimax(curDepth + 1, nodeIndex * 2 + 1,True, scores, targetDepth))
+
+# Driver code
+scores = [3, 5, 2, 9, 12, 5, 23, 20]
+treeDepth = math.log(len(scores), 2) # calculate depth of node log 8 (base 2) = 3)
+print("The optimal value is : ", end = "")
+print(minimax(0, 0, True, scores, treeDepth))
 ```
 
 
@@ -44,9 +44,9 @@ dfs(visited, graph, '5')
 
 
 ### Output:
-![image](https://github.com/user-attachments/assets/b3a3b2be-528e-4715-830f-92bd8a752f17)
+![image](https://github.com/user-attachments/assets/4440cbed-38bb-446b-8382-8771a9e0c19d)
 
 
 
 ### Result:
-Thus the depth first search order was found sucessfully.
+Thus the optimum value of max player was found using minimax search.
